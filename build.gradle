@@ -1,0 +1,44 @@
+task wrapper(type: Wrapper) {
+	gradleVersion = '4.7'
+	distributionUrl = "http://mavenrepository.int.corp.sun/content/repositories/gradle/gradle-${gradleVersion}-bin.zip"
+}
+buildscript {
+	ext {
+		springBootVersion = '2.0.3.RELEASE'
+	}
+	repositories {
+		maven { url "http://mavenrepository.int.corp.sun/content/repositories/inhouse" }
+		maven { url "http://mavenrepository.int.corp.sun/content/repositories/inhouse.snapshot" }
+		maven { url "http://mavenrepository.int.corp.sun/content/repositories/central/" }
+		maven { url "http://mavenrepository.int.corp.sun/content/groups/public/" }
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.suncorp.rekognition'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	maven { url "http://mavenrepository.int.corp.sun/content/repositories/inhouse" }
+	maven { url "http://mavenrepository.int.corp.sun/content/repositories/inhouse.snapshot" }
+	maven { url "http://mavenrepository.int.corp.sun/content/repositories/central/" }
+	maven { url "http://mavenrepository.int.corp.sun/content/groups/public/" }
+	mavenCentral()
+	mavenLocal()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
