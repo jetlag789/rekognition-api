@@ -15,6 +15,7 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
 	}
 }
 
@@ -28,6 +29,12 @@ group = 'com.suncorp.rekognition'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
+dependencyManagement {
+	imports {
+		mavenBom 'software.amazon.awssdk:bom:2.0.0-preview-1'
+	}
+}
+
 repositories {
 	maven { url "http://mavenrepository.int.corp.sun/content/repositories/inhouse" }
 	maven { url "http://mavenrepository.int.corp.sun/content/repositories/inhouse.snapshot" }
@@ -40,5 +47,6 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile 'software.amazon.awssdk:s3'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
